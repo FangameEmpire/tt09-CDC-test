@@ -2,7 +2,7 @@
 module alu #(parameter WIDTH = 8) (en_i, ctl_i, AB_i, BC_o);
 	// Ports
 	input  wire en_i;
-	input  wire [02:00] ctl_1;
+	input  wire [02:00] ctl_i;
 	
 	input  wire [WIDTH * 2 - 1:00] AB_i;
 	output wire [WIDTH * 2 - 1:00] BC_o;
@@ -16,7 +16,7 @@ module alu #(parameter WIDTH = 8) (en_i, ctl_i, AB_i, BC_o);
 	always @(*) begin
 		case (ctl) begin
 			3'b000:  C = 0;
-			3'b001:  C = {WIDTH{1'b1}};
+			3'b001:  C = 1;
 			3'b010:  C = A;
 			3'b011:  C = B;
 			3'b100:  C = A + B;

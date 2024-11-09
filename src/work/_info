@@ -1,0 +1,46 @@
+m255
+K3
+13
+cModel Technology
+Z0 dC:\altera\13.1
+valu
+Z1 !s100 AH<e37V[UcH<cLSHUf@bF1
+Z2 I:a3__g97XnC:KfAWiUD;62
+Z3 VL1a3^2?KWF4<e;QNRSUFJ0
+Z4 dE:\,Temporary\TT09\tt09-CDC-test\src
+Z5 w1731186184
+Z6 8./alu.v
+Z7 F./alu.v
+L0 2
+Z8 OV;L;10.1d;51
+r1
+31
+Z9 !s90 -reportprogress|300|./alu.v|
+o-O0
+!i10b 1
+!s85 0
+Z10 !s108 1731186851.765000
+Z11 !s107 ./alu.v|
+!s101 -O0
+valu_testbench
+Z12 DXx6 sv_std 3 std 0 22 F[19LRNL:5;XmIFh[XOPn1
+!i10b 1
+Z13 !s100 Aa>]M]ENT>_aMcFUQ5OWm1
+Z14 IdMEgRlb=6[S823c`gL<9H1
+Z15 VN^B;K=YF1jHT`KC`UlBP_1
+Z16 !s105 tb_alu_sv_unit
+S1
+R4
+Z17 w1731186830
+Z18 8./tb_alu.sv
+Z19 F./tb_alu.sv
+L0 3
+R8
+r1
+!s85 0
+31
+!s108 1731186851.985000
+!s107 ./tb_alu.sv|
+Z20 !s90 -reportprogress|300|./tb_alu.sv|
+!s101 -O0
+o-O0

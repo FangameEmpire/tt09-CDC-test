@@ -1,58 +1,48 @@
 // Testbench  designed for Quartus and ModelSim
 `timescale 1ns/10ps
-module alu_Testbench();
+module alu_testbench();
 	// Choose a width
-	LOCALPARAM WIDTH = 8;
+	localparam WIDTH = 8;
 
 	// Module ports
-	wire en_i;
-	wire [02:00] ctl_i;
+	logic en_i;
+	logic [02:00] ctl_i;
 	
-	wire [WIDTH * 2 - 1:00] AB_i;
-	wire [WIDTH * 2 - 1:00] BC_o;
+	logic [WIDTH * 2 - 1:00] AB_i;
+	logic [WIDTH * 2 - 1:00] BC_o;
 	
 	// Device under test
-	alu due (en_i, ctl_i, AB_i, BC_o);
+	alu dut (en_i, ctl_i, AB_i, BC_o);
+	
+	//  Simulation parameters
+	localparam RUNS = 5;
+	localparam DELAY = 1;
+	string OPCODES [8] = {"PASS 0", "PASS 1" , "PASS A", "PASS B", "ADD", "SUB", "AND", "OR"};
+	string CURRENT_TEST = "RESET";
 	
 	// ALU tests
 	initial begin
 		// Reset case
-		en_i = 0; ctl_i = 0; AB_i = 0;
+		en_i = 0; ctl_i = 0; AB_i = 0; #DELAY;
 		
 		// Test pass
+		en_i = 1;
+		for (int i = 0; i < 4; i++) begin
+			ctl_i = i; CURRENT_TEST = OPCODES[ctl_i];
+			for (int j = 0; j < RUNS; j++) begin
+				AB_i = $urandom(); #DELAY;
+			end // for j
+		end // for i
 		
 		// Test arithmetic
 		
 		// Test logic
 		
-		//  Test random input for each mode
+		// Test random input for random opcodes
 		
-		// Test random input for random mode
-	end // initial
-
-endmodule // alu_Testbench
-
-`timescale 1ns/10ps
-module enabled_decoder_32_testbench ();
-	logic [ 4:0] in;
-	logic [31:0] out;
-	logic        en;
-	
-	enabled_decoder_32 dut (.*);
-	
-	initial begin
-		en = 1;
-		for (int i = 0; i < 32; i = i + 1) begin
-			in = i; #10;
-		end // for
-		in = 0; #10;
-		
-		en = 0;
-		for (int i = 0; i < 32; i = i + 1) begin
-			in = i; #10;
-		end // for
-		in = 0; #10;
+		// Test disable
 		
 	end // initial
-	
-endmodule // enabled_decoder_32_testbench
+
+endmodule // alu_testbench
+

@@ -8,16 +8,17 @@ module alu #(parameter WIDTH = 8) (en_i, ctl_i, AB_i, BC_o);
 	output wire [WIDTH * 2 - 1:00] BC_o;
 	
 	// Split inputs
-	wire [WIDTH - 1:00] A, B, C;
+	wire [WIDTH - 1:00] A, B;
 	assign A = AB_i[WIDTH * 2 - 1:WIDTH];
 	assign B = AB_i[WIDTH - 1:00];
 	
 	// Actual ALU
+	reg [WIDTH - 1:00] C;
 	always @(*) begin
 		if (~en_i) begin
 			C = 0;
 		end else begin
-			case (ctl) begin
+			case (ctl_i)
 				3'b000:  C = 0;
 				3'b001:  C = 1;
 				3'b010:  C = A;

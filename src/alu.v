@@ -14,17 +14,21 @@ module alu #(parameter WIDTH = 8) (en_i, ctl_i, AB_i, BC_o);
 	
 	// Actual ALU
 	always @(*) begin
-		case (ctl) begin
-			3'b000:  C = 0;
-			3'b001:  C = 1;
-			3'b010:  C = A;
-			3'b011:  C = B;
-			3'b100:  C = A + B;
-			3'b101:  C = A - B;
-			3'b110:  C = A & B;
-			3'b111:  C = A | B;
-			default: C = A + B;
-		endcase // ctl
+		if (~en_i) begin
+			C = 0;
+		end else begin
+			case (ctl) begin
+				3'b000:  C = 0;
+				3'b001:  C = 1;
+				3'b010:  C = A;
+				3'b011:  C = B;
+				3'b100:  C = A + B;
+				3'b101:  C = A - B;
+				3'b110:  C = A & B;
+				3'b111:  C = A | B;
+				default: C = A + B;
+			endcase // ctl
+		end // if (en_i)
 	end // always @(*)
 	
 	// Combine outputs

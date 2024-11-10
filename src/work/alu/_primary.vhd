@@ -7,8 +7,9 @@ entity alu is
     port(
         en_i            : in     vl_logic;
         ctl_i           : in     vl_logic_vector(2 downto 0);
-        AB_i            : in     vl_logic_vector;
-        BC_o            : out    vl_logic_vector
+        A_i             : in     vl_logic_vector;
+        B_i             : in     vl_logic_vector;
+        C_o             : out    vl_logic_vector
     );
     attribute mti_svvh_generic_type : integer;
     attribute mti_svvh_generic_type of WIDTH : constant is 1;

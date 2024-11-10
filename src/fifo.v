@@ -12,8 +12,8 @@ module fifo #(parameter WIDTH = 8) (clk_i, rst_i, en_i, shift_i, load_i, data_va
 	// Shift register and hold register
 	reg [WIDTH - 1:0] sr, hr;
 	
-	// Count bits shifted in this shift operration
-	reg [$clog2(WIDTH):0] bits_shifted;
+	// Count bits shifted in this shift operation
+	reg [$clog2(WIDTH) - 1:0] bits_shifted;
 	
 	// Control registers
 	always @(posedge clk_i) begin
@@ -27,11 +27,12 @@ module fifo #(parameter WIDTH = 8) (clk_i, rst_i, en_i, shift_i, load_i, data_va
 			bits_shifted <= bits_shifted;
 		end else begin
 			if (bits_shifted != 0) begin
-				sr <= {serial_i, sr[WIDTH - 2:0]};
-				hr <= hr;
+				sr <= {serial_i, sr[WIDTH - 1:1]};
+				if (bits_shifted == WIDTH - 1) hr <= {serial_i, sr[WIDTH - 1:1]};
+				else hr <= hr;
 				bits_shifted <= bits_shifted + 1;
 			end else if (shift_i) begin
-				sr <= {serial_i, sr[WIDTH - 2:0]};
+				sr <= {serial_i, sr[WIDTH - 1:1]};
 				hr <= sr;
 				bits_shifted <= bits_shifted + 1;
 			end else if (load_i) begin

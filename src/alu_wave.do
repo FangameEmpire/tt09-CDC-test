@@ -3,20 +3,15 @@ quietly WaveActivateNextPane {} 0
 add wave -noupdate /alu_testbench/CURRENT_TEST
 add wave -noupdate -expand -group CONTROLS /alu_testbench/en_i
 add wave -noupdate -expand -group CONTROLS /alu_testbench/ctl_i
-add wave -noupdate -expand -group DATAPATH /alu_testbench/AB_i
-add wave -noupdate -expand -group DATAPATH /alu_testbench/BC_o
-add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/dut/A
-add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/dut/B
-add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/dut/C
-add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/dut/A
-add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/dut/B
-add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/dut/C
-add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/dut/A
-add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/dut/B
-add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/dut/C
-add wave -noupdate -group {PORTS (TB)} /alu_testbench/A_TB
-add wave -noupdate -group {PORTS (TB)} /alu_testbench/B_TB
-add wave -noupdate -group {PORTS (TB)} /alu_testbench/C_TB
+add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/A_i
+add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/B_i
+add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/C_o
+add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/A_i
+add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/B_i
+add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/C_o
+add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/A_i
+add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/B_i
+add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/C_o
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {0 ps} 0}
 quietly wave cursor active 0
@@ -34,4 +29,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {11011 ps} {27011 ps}
+WaveRestoreZoom {65800 ps} {81800 ps}

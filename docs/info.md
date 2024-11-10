@@ -9,12 +9,12 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-The project presents an RGB222 VGA signal to the output port.
+TBD - Need to determine bus size and ALU complexity
 
 ## How to test
 
-Runs automaticaly.
+TBD
 
 ## External hardware
 
-VGA PMOD on UO.
+TBD - Probably juust some clock generators and the carrier board for UART

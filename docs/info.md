@@ -9,7 +9,7 @@ You can also include images in this folder and reference them in the markdown. E
 
 ## How it works
 
-The project presents an RGB222 VGA signal to the output port.
+If you're seeing this, I couldn't the Clock Domain Crossing project running. This is just a TT08 demo again.
 
 ## How to test
 

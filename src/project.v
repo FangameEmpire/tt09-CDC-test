@@ -346,7 +346,7 @@ module skyking_generator(
   assign do_letter[17] = (character_hold[17]  ? 
 						  (((pix_y[8:2] == 7'b1101100) & (pix_x[8:3] == 6'b111001)
 						  | (pix_y[8:2] == 7'b1101100) & (pix_x[8:3] == 6'b111010))) :
-						  (((pix_y[8:2] == 7'b1101100) & (pix_x[8:4] == 4'b00000) & ~pix_x[9])))
+						  (((pix_y[8:2] == 7'b1101100) & (pix_x[8:4] == 4'b0000) & ~pix_x[9])))
 						  & counter[22];
 
 	// Alt letters

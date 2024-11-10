@@ -11,9 +11,12 @@ add wave -noupdate -expand -group {PORTS (BIN)} /alu_testbench/dut/C
 add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/dut/A
 add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/dut/B
 add wave -noupdate -expand -group {PORTS (HEX)} -radix hexadecimal /alu_testbench/dut/C
-add wave -noupdate -expand -group PORTS(DEC) -radix decimal /alu_testbench/dut/A
-add wave -noupdate -expand -group PORTS(DEC) -radix decimal /alu_testbench/dut/B
-add wave -noupdate -expand -group PORTS(DEC) -radix decimal /alu_testbench/dut/C
+add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/dut/A
+add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/dut/B
+add wave -noupdate -expand -group {PORTS (DEC)} -radix decimal /alu_testbench/dut/C
+add wave -noupdate -group {PORTS (TB)} /alu_testbench/A_TB
+add wave -noupdate -group {PORTS (TB)} /alu_testbench/B_TB
+add wave -noupdate -group {PORTS (TB)} /alu_testbench/C_TB
 TreeUpdate [SetDefaultTree]
 WaveRestoreCursors {{Cursor 1} {0 ps} 0}
 quietly wave cursor active 0
@@ -31,4 +34,4 @@ configure wave -griddelta 40
 configure wave -timeline 0
 configure wave -timelineunits ps
 update
-WaveRestoreZoom {5800 ps} {21800 ps}
+WaveRestoreZoom {11011 ps} {27011 ps}

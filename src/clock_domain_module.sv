@@ -14,7 +14,7 @@ module clock_domain_module(
 	
 	// Data ports
 	input logic data_i;
-	input logic data_o;
+	output logic data_o;
 	
 	// Hold data
 	localparam DATA_WIDTH = 8;
@@ -22,10 +22,10 @@ module clock_domain_module(
 	
 	// Input SIPO FIFO and output PISO FIFO
 	// Ports: (clk_i, rst_i, en_i, shift_i, load_i, data_valid_o, serial_i, serial_o, parallel_i, parallel_o)
-	wire data_in_valid, send_data_out, load_data_to_send;
+	wire new_data_valid, send_data_out, load_data_to_send;
 	fifo #(.WIDTH(DATA_WIDTH * 2)) in_shifter (
 		.clk_i(clk_prev_i), .rst_i(rst_prev_i), .en_i(en_i), 
-		.shift_i(new_data_i), .load_i(1'b0), .data_valid_o(done_shifting_i), 
+		.shift_i(new_data_i), .load_i(1'b0), .data_valid_o(new_data_valid), 
 		.serial_i(data_i), .serial_o(), .parallel_i(0), .parallel_o({A, B}));
 	fifo #(.WIDTH(DATA_WIDTH * 2))out_shifter (
 		.clk_i(clk_i), .rst_i(rst_i), .en_i(en_i), 
@@ -36,5 +36,36 @@ module clock_domain_module(
 	// Ports: (en_i, ctl_i, AB_i, BC_o)
 	alu #(.WIDTH(DATA_WIDTH)) main_alu (
 		.en_i, .ctl_i, .A_i(A), .B_i(B), .C_o(C));
+	
+	// FSM
+	enum {idle, shift_in, wait_for_uart, shift_out} ps, ns;
+	
+	always @(posedge clk_i) begin
+		if (rst_i) 		ps <= idle;
+		else if (~en_i) ps <= ps;
+		else			ps <= ns;
+	end // always @(posedge clk_i)
+	
+	always @(*) begin
+		if (rst_i) ns = idle;
+		else if (~en_i) ns = ns;
+		else begin
+			case (ps)
+				idle: ns = new_data_i ? shift_in : idle;
+				shift_in: ns = done_shifting_i ? wait_for_uart : shift_in;
+				wait_for_uart: ns = shift_out;
+				shift_out: ns = done_shifting_o ? idle : shift_out;
+				default: ns = idle;
+			endcase
+		end
+	end // always @(*)
+	
+	// Internal status
+	assign load_data_to_send = (ps == wait_for_uart) & (ns == shift_out);
+	assign send_data_out = (ps == shift_out);
+	
+	// Status outputs
+	assign current_state_o = ps;
+	assign new_data_o = (ps == shift_out) & (ns == idle);
 	
 endmodule // clock_domain_module
